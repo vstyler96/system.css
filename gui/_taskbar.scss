@@ -1,0 +1,66 @@
+/*
+ * Taskbar: the strip and its start button.
+ * Markup (win7-vue <WinStartButton>):
+ *   <button class="start-button" aria-haspopup="menu" aria-expanded="false" aria-label="Start"></button>
+ * The doubled class outranks every button state rule in _button.scss, so none of the regular
+ * button chrome (borders, gradients, ::before/::after layers, focus pulse) leaks into it.
+ */
+/* Taskbar strip: start button, app buttons, tray and show-desktop in one horizontal row */
+.taskbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* App buttons sit right after the start button: this area takes all the free space, so the
+   tray and show-desktop stay at the right edge. */
+.taskbar-items {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-width: 0;
+}
+
+/* System 6 Apple menu: the typography .apple logo; inverted while pressed or open. */
+button.start-button.start-button {
+  box-sizing: border-box;
+  display: inline-block;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  animation: none;
+  transition: none;
+  background-color: transparent;
+  color: transparent; /* the art carries the label; aria-label names the button */
+  font-size: 0;
+  overflow: hidden;
+  vertical-align: middle;
+  cursor: default;
+
+  width: 30px;
+  height: 22px;
+  background: #fff url("./icon/apple.svg") no-repeat center / 9px 11px;
+
+  &::before,
+  &::after {
+    content: none;
+    display: none;
+  }
+
+  &:active,
+  &.active,
+  &[aria-expanded="true"] {
+    filter: invert(1);
+  }
+
+  &:focus-visible {
+    outline: 1px dotted #000;
+    outline-offset: 1px;
+  }
+}

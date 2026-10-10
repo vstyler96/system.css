@@ -89,6 +89,7 @@ import "@vstyler96/system.css/dist/system.css";
 | Slider | `input[type=range]` | `.has-box-indicator`, wrap in `.is-vertical` |
 | Spinner | `.spinner` (or `.loader`) | `.animate` |
 | Balloon | `[role=tooltip]` | `.is-top`, `.is-left` |
+| Start button | `button.start-button` (the Apple menu logo) | `[aria-expanded="true"]` (inverted, menu open) |
 | Scrollbar | `.has-scrollbar` on the scrolling element | WebKit/Blink only |
 | Typography | `.instruction`, `.instruction-primary`, `.header-document`, `.header-group`, `a` | |
 | Extras | `.outer-border` > `.inner-border` (double frame), `span.apple` (Apple logo) | |
