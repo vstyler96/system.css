@@ -1,0 +1,60 @@
+:root {
+  --sys-rd-size: 12px;
+  --sys-rdl-space: 6px; /* rdl = radio label */
+  --sys-rdd-size: 6px; /* rdd = radio dot */
+}
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin: 0;
+  background: none;
+  border: none;
+  position: fixed;
+  opacity: 0;
+
+  + label {
+    font: var(--sys-font);
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+
+    &::before {
+      content: "";
+      flex: none;
+      width: var(--sys-rd-size);
+      height: var(--sys-rd-size);
+      margin-right: var(--sys-rdl-space);
+      background: url("./icon/radio-border.svg") no-repeat;
+    }
+
+    &:hover::before {
+      background-image: url("./icon/radio-border-focused.svg");
+    }
+  }
+
+  &:focus-visible + label::before {
+    background-image: url("./icon/radio-border-focused.svg");
+  }
+
+  &:checked + label::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: calc((var(--sys-rd-size) - var(--sys-rdd-size)) / 2);
+    width: var(--sys-rdd-size);
+    height: var(--sys-rdd-size);
+    transform: translateY(-50%);
+    background: url("./icon/radio-dot.svg") no-repeat;
+  }
+
+  &:disabled + label {
+    color: var(--sys-el-c-d);
+
+    &::before,
+    &::after {
+      opacity: 0.4;
+    }
+  }
+}

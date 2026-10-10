@@ -1,0 +1,28 @@
+/* Pop-up menu: framed box with a drop shadow and a down triangle */
+select:not([multiple]) {
+  font: var(--sys-font);
+  box-sizing: border-box;
+  min-width: 10rem;
+  height: 24px;
+  padding: 0 28px 0 8px;
+  border: 1px solid var(--sys-el-bd);
+  border-radius: 0;
+  box-shadow: 1px 1px 0 var(--sys-secondary);
+  color: var(--sys-el-c);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url("./icon/select-button.svg") no-repeat right 3px center, var(--sys-el-bg);
+
+  &:focus-visible {
+    outline: 1px dotted var(--sys-el-c);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    border-color: var(--sys-el-bd-d);
+    box-shadow: none;
+    color: var(--sys-el-c-d);
+    background-image: url("./icon/select-button-disabled.svg");
+  }
+}

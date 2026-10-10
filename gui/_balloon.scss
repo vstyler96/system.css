@@ -1,0 +1,50 @@
+/* System 7 Balloon Help: rounded box, hard shadow, wedge-shaped tail */
+:root {
+  /* blt = balloon tail */
+  --sys-blt-size: 16px;
+  --sys-blt-offset: 1em;
+  --sys-blt-icon: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.5 0V16.5H16Z' fill='white'/%3E%3Cpath d='M0.5 0V16M0.5 0L16 15.5' stroke='black'/%3E%3C/svg%3E");
+}
+
+[role="tooltip"] {
+  font: var(--sys-font-small);
+  position: relative;
+  padding: 0.75em 1em;
+  border: 1px solid var(--sys-el-bd);
+  border-radius: 12px;
+  box-shadow: var(--sys-el-sd);
+  background: var(--sys-el-bg);
+  color: var(--sys-el-c);
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: var(--sys-blt-size);
+    height: var(--sys-blt-size);
+    top: calc(var(--sys-blt-size) * -1 + 1px);
+    left: var(--sys-blt-offset);
+    background: var(--sys-blt-icon);
+  }
+
+  &[id] {
+    position: absolute;
+  }
+
+  /* .is-top: balloon above its target, tail at the bottom.
+   * .is-left: balloon left of its target, tail on the right. */
+  &.is-top::before {
+    top: unset;
+    bottom: calc(var(--sys-blt-size) * -1 + 1px);
+    transform: scaleY(-1);
+  }
+
+  &.is-left::before {
+    left: unset;
+    right: var(--sys-blt-offset);
+    transform: scaleX(-1);
+  }
+
+  &.is-top.is-left::before {
+    transform: scale(-1);
+  }
+}

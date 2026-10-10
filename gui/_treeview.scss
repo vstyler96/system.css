@@ -1,0 +1,87 @@
+:root {
+  --sys-tvb-size: 9px; /* tvb = treeview button */
+  --sys-tv-left: 20px;
+}
+
+ul.tree-view {
+  font: var(--sys-font);
+  display: block;
+  margin: 0;
+  padding: 6px 6px 6px var(--sys-tv-left);
+  color: var(--sys-el-c);
+
+  li {
+    position: relative;
+    margin-top: 2px;
+    list-style-type: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    &:focus,
+    &:hover {
+      background: var(--sys-li-bg-hl);
+      color: var(--sys-li-c-hl);
+    }
+  }
+
+  ul {
+    margin-top: 2px;
+    padding-left: var(--sys-tv-left);
+  }
+
+  &.has-container {
+    background: var(--sys-el-bg);
+    border: 1px solid var(--sys-el-bd);
+  }
+
+  /* Boxed +/- instead of the disclosure triangle */
+  &.has-collapse-button details {
+    > summary::before {
+      content: "+";
+      top: calc(50% - var(--sys-tvb-size) / 2 - 1px);
+      left: calc(var(--sys-tvb-size) * -2);
+      right: unset;
+      width: var(--sys-tvb-size);
+      height: var(--sys-tvb-size);
+      border: 1px solid var(--sys-el-bd);
+      border-radius: 0;
+      background: var(--sys-el-bg);
+      color: var(--sys-el-c);
+      font: 9px/9px "Geneva_9", monospace;
+      text-align: center;
+      transform: none;
+    }
+
+    &[open] > summary::before {
+      content: "\2013";
+      transform: none;
+    }
+  }
+
+  &.has-connector {
+    ul {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: var(--sys-tvb-size);
+        height: calc(100% - var(--sys-tvb-size));
+        border-left: 1px dotted var(--sys-el-bd);
+      }
+
+      li::before {
+        content: "";
+        position: absolute;
+        top: var(--sys-tvb-size);
+        right: calc(100% + var(--sys-tvb-size) / 4);
+        width: calc(var(--sys-tv-left) / 2);
+        border-bottom: 1px dotted var(--sys-el-bd);
+      }
+    }
+  }
+}

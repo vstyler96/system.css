@@ -1,0 +1,36 @@
+:root {
+  /* clc = collapse chevron (System 7 disclosure triangle) */
+  --sys-clc-size: 5px;
+}
+
+details {
+  margin-top: 0;
+
+  > summary {
+    display: inline;
+    position: relative;
+    margin-bottom: 0;
+    margin-left: calc(var(--sys-clc-size) * 2 + 4px);
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: calc(50% - var(--sys-clc-size));
+      right: calc(100% + 4px);
+      border: var(--sys-clc-size) solid transparent;
+      border-right-width: 0;
+      border-left-color: var(--sys-secondary);
+    }
+
+    &::-webkit-details-marker,
+    &::marker {
+      display: none;
+      content: "";
+    }
+  }
+
+  &[open] > summary::before {
+    transform: rotate(90deg);
+  }
+}

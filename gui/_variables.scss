@@ -1,0 +1,41 @@
+:root {
+  /* Naming convention:
+   * `--sys-<component>-<property>-<state>`
+   * where:
+   * <component> is the name of the component (el = element, li = list item, etc.)
+   * <property> is the property being defined (bg = background, bd = border, c = color, sd = shadow, etc.)
+   * <state> is the state of the component (d = disabled, h = hovered, a = active, hl = highlighted, etc.)
+   */
+
+  --sys-font: 16px "Chicago_12", "Chicago", sans-serif;
+  --sys-font-small: 16px "Geneva_9", "Geneva", sans-serif;
+  --sys-font-mono: 12px "Monaco", monospace;
+
+  /* System 6 is monochrome: everything derives from these four */
+  --sys-primary: #ffffff;
+  --sys-secondary: #000000;
+  --sys-tertiary: #a5a5a5;
+  --sys-disabled: #b6b7b8;
+
+  --sys-surface: var(--sys-primary);
+
+  --sys-el-bg: var(--sys-primary);
+  --sys-el-bg-a: var(--sys-secondary);
+  --sys-el-bd: var(--sys-secondary);
+  --sys-el-bd-d: var(--sys-disabled);
+  --sys-el-bdr: 6px; /* element border radius */
+  --sys-el-c: var(--sys-secondary);
+  --sys-el-c-a: var(--sys-primary);
+  --sys-el-c-d: var(--sys-tertiary);
+  --sys-el-sd: 2px 2px 0 var(--sys-secondary); /* hard drop shadow (menus, dialogs, lists) */
+
+  --sys-link-c: var(--sys-secondary);
+  --sys-title-c: var(--sys-secondary);
+
+  --sys-li-bg-hl: var(--sys-secondary);
+  --sys-li-c-hl: var(--sys-primary);
+
+  /* 50% dither, the classic desktop / scroll-track pattern */
+  --sys-dither: linear-gradient(45deg, var(--sys-secondary) 25%, transparent 25% 75%, var(--sys-secondary) 75%) 0 0 / 4px 4px,
+    linear-gradient(45deg, var(--sys-secondary) 25%, transparent 25% 75%, var(--sys-secondary) 75%) 2px 2px / 4px 4px;
+}

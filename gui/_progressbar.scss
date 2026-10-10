@@ -1,0 +1,51 @@
+:root {
+  --sys-pg-bg: var(--sys-secondary);
+  --sys-pg-bg-paused: var(--sys-dither), var(--sys-primary);
+  --sys-pg-bg-error: repeating-linear-gradient(90deg, var(--sys-secondary) 0 2px, var(--sys-primary) 2px 4px);
+  /* Barber pole, the classic indeterminate Mac progress bar */
+  --sys-pg-pole: repeating-linear-gradient(-45deg, var(--sys-secondary) 0 6px, var(--sys-primary) 6px 12px);
+}
+
+[role="progressbar"] {
+  box-sizing: border-box;
+  height: 14px;
+  margin: 2px 0;
+  overflow: hidden;
+  border: 1px solid var(--sys-el-bd);
+  background: var(--sys-el-bg);
+
+  > div {
+    height: 100%;
+    background: var(--sys-pg-bg);
+  }
+
+  &.paused > div {
+    background: var(--sys-pg-bg-paused);
+  }
+
+  &.error > div {
+    background: var(--sys-pg-bg-error);
+  }
+
+  &.animate > div,
+  &.marquee::before {
+    background: var(--sys-pg-pole);
+    background-size: 17px 17px;
+    animation: sys-progressbar 0.6s linear infinite;
+  }
+
+  &.marquee::before {
+    content: "";
+    display: block;
+    height: 100%;
+  }
+}
+
+@keyframes sys-progressbar {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 17px 0;
+  }
+}

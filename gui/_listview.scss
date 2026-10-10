@@ -1,0 +1,97 @@
+:root {
+  --sys-lvc-size: 5px; /* lvc = listview sort caret */
+  /* light 1-in-8 dither for alternate rows; the dot colour is baked into the SVG */
+  --sys-lv-bg-alt: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1'/%3E%3Crect x='2' y='2' width='1' height='1'/%3E%3C/svg%3E"), var(--sys-el-bg);
+  --sys-lv-bg-h: var(--sys-li-bg-hl);
+  --sys-lv-c-h: var(--sys-li-c-hl);
+}
+
+table {
+  font: var(--sys-font);
+  position: relative;
+  border-collapse: collapse;
+  table-layout: fixed;
+  text-align: left;
+  white-space: nowrap;
+  background: var(--sys-el-bg);
+  color: var(--sys-el-c);
+  border: 1px solid var(--sys-el-bd);
+
+  td,
+  th {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &.has-shadow {
+    box-shadow: var(--sys-el-sd);
+  }
+
+  > thead > tr > * {
+    position: sticky;
+    top: 0;
+    height: 22px;
+    padding: 0 8px;
+    box-sizing: border-box;
+    font-weight: normal;
+    background: var(--sys-el-bg);
+    border-bottom: 1px solid var(--sys-el-bd);
+    cursor: default;
+
+    /* Finder "by Name" view: the sort column is underlined */
+    &.highlighted {
+      text-decoration: underline;
+
+      &.indicator::after {
+        content: "";
+        display: inline-block;
+        margin-left: 6px;
+        vertical-align: middle;
+        border: var(--sys-lvc-size) solid transparent;
+        border-bottom-width: 0;
+        border-top-color: currentColor;
+      }
+
+      &.indicator.up::after {
+        border-top-width: 0;
+        border-bottom-width: var(--sys-lvc-size);
+        border-top-color: transparent;
+        border-bottom-color: currentColor;
+      }
+    }
+  }
+
+  > tbody > tr {
+    cursor: default;
+
+    > * {
+      height: 18px;
+      padding: 1px 8px;
+    }
+
+    &.highlighted {
+      background: var(--sys-li-bg-hl);
+      color: var(--sys-li-c-hl);
+    }
+  }
+
+  &.is-full {
+    width: 100%;
+  }
+
+  /* :not(.highlighted) keeps the selection on top of stripes and hover */
+  &.is-striped > tbody > tr:nth-child(even):not(.highlighted) {
+    background: var(--sys-lv-bg-alt);
+  }
+
+  &.has-hover > tbody > tr:not(.highlighted):hover {
+    background: var(--sys-lv-bg-h);
+    color: var(--sys-lv-c-h);
+  }
+
+  th.is-center,
+  td.is-center {
+    text-align: center;
+  }
+}

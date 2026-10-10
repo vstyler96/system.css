@@ -1,33 +1,43 @@
 {
-  "name": "@sakun/system.css",
-  "version": "0.1.11",
+  "name": "@vstyler96/system.css",
+  "version": "2.0.0",
   "description": "A design system for building retro Apple interfaces",
   "main": "dist/system.css",
+  "publishConfig": {
+    "access": "public"
+  },
   "directories": {
     "doc": "docs"
   },
   "scripts": {
+    "start": "node server.js",
     "build": "node build.js",
     "deploy": "npm run build && gh-pages -d dist",
     "release": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sakofchit/system.css.git"
+    "url": "git+https://github.com/vstyler96/system.css.git"
   },
   "keywords": [
     "css",
-    "classic macos"
+    "classic macos",
+    "system 6",
+    "gui"
   ],
-  "author": "Sakun Acharige <hey@sakun.co>",
+  "contributors": [
+    "Sakun Acharige <hey@sakun.co>",
+    "Vincent GS <vstyler96@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sakofchit/system.css/issues"
+    "url": "https://github.com/vstyler96/system.css/issues"
   },
-  "homepage": "https://github.com/sakofchit/system.css",
+  "homepage": "https://github.com/vstyler96/system.css",
   "devDependencies": {
+    "autoprefixer": "^10.4.8",
     "chokidar": "^3.3.1",
-    "cssnano": "^5.0.1",
+    "cssnano": "^5.1.7",
     "dedent": "^0.7.0",
     "ejs": "^3.1.8",
     "gh-pages": "^2.2.0",
@@ -36,13 +46,16 @@
     "live-server": "^1.2.1",
     "mkdirp": "^1.0.4",
     "postcss": "^8.4.14",
+    "postcss-base64": "^0.7.1",
     "postcss-calc": "^7.0.2",
-    "postcss-copy": "^7.1.0",
-    "postcss-css-variables": "^0.18.0",
-    "postcss-inline": "^1.2.0",
-    "postcss-inline-svg": "^4.1.0"
+    "postcss-css-variables": "^0.19.0",
+    "postcss-import": "^12.0.1",
+    "postcss-nested": "^4.2.1",
+    "postcss-prefix-selector": "^1.15.0"
   },
-  "dependencies": {
-    "draggabilly": "^3.0.0"
-  }
+  "files": [
+    "dist/gui",
+    "dist/fonts",
+    "dist/system*"
+  ]
 }

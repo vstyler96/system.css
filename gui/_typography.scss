@@ -1,0 +1,65 @@
+@font-face {
+  font-family: Chicago;
+  src: url("./fonts/ChicagoFLF.woff2") format("woff2"), url("./fonts/ChicagoFLF.woff") format("woff");
+}
+@font-face {
+  font-family: Monaco;
+  src: url("./fonts/monaco.woff2") format("woff2"), url("./fonts/monaco.woff") format("woff");
+}
+
+/* Fonts below are recreations by Giles Booth */
+@font-face {
+  font-family: Chicago_12;
+  src: url("./fonts/ChiKareGo2.woff2") format("woff2"), url("./fonts/ChiKareGo2.woff") format("woff");
+}
+@font-face {
+  font-family: Geneva_9;
+  src: url("./fonts/FindersKeepers.woff2") format("woff2"), url("./fonts/FindersKeepers.woff") format("woff");
+}
+
+a {
+  color: var(--sys-link-c);
+  text-decoration: underline;
+
+  &:focus-visible {
+    outline: 1px dotted var(--sys-link-c);
+  }
+}
+
+.instruction {
+  font: var(--sys-font);
+  color: var(--sys-el-c);
+  font-weight: normal;
+  margin: 0 0 16px;
+
+  &-primary {
+    font: 24px "Chicago", sans-serif;
+    color: var(--sys-title-c);
+  }
+}
+
+.header {
+  font: var(--sys-font);
+  font-weight: normal;
+
+  &-document {
+    font: 32px "Chicago", sans-serif;
+    color: var(--sys-el-c);
+  }
+
+  &-group {
+    font: var(--sys-font);
+    color: var(--sys-title-c);
+  }
+}
+
+/* Inline Apple logo, e.g. as the first menubar item */
+.apple {
+  display: inline-block;
+  width: 18px;
+  height: 22px;
+  margin-right: 2px;
+  border: none;
+  background: url("./icon/apple.svg") no-repeat;
+  vertical-align: middle;
+}

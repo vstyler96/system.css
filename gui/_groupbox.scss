@@ -1,0 +1,46 @@
+fieldset {
+  margin: 0;
+  padding: 10px 12px 12px;
+  border: 1px solid var(--sys-el-bd);
+
+  legend {
+    font: var(--sys-font);
+    padding: 0 4px;
+    background: var(--sys-surface);
+  }
+}
+
+fieldset,
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.group + .group {
+  margin-top: 6px;
+}
+
+.field-row {
+  display: flex;
+  align-items: center;
+  font: var(--sys-font);
+
+  > * + * {
+    margin-left: 6px;
+  }
+}
+
+.field-row-stacked {
+  display: flex;
+  flex-direction: column;
+  font: var(--sys-font);
+
+  > * + * {
+    margin-top: 4px;
+  }
+}
+
+[class^="field-row"] + [class^="field-row"] {
+  margin-top: 6px;
+}

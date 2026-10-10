@@ -1,0 +1,93 @@
+:root {
+  --sys-sb-size: 22px;
+  --sys-sb-btn-size: 23.38px;
+}
+
+.has-scrollbar::-webkit-scrollbar {
+  width: var(--sys-sb-size);
+  height: var(--sys-sb-size);
+  background-color: var(--sys-surface);
+
+  &-corner {
+    background: var(--sys-surface);
+    border: solid var(--sys-secondary);
+    border-width: 1px 0 0 1px;
+  }
+
+  &-track {
+    background: var(--sys-dither), var(--sys-surface);
+
+    &:vertical {
+      border-left: 3px solid var(--sys-secondary);
+    }
+
+    &:horizontal {
+      border-top: 3px solid var(--sys-secondary);
+    }
+  }
+
+  &-thumb {
+    box-sizing: content-box;
+    background-color: var(--sys-surface);
+    border: 2px solid var(--sys-secondary);
+
+    &:vertical {
+      border-right: none;
+    }
+
+    &:horizontal {
+      border-bottom: none;
+    }
+  }
+
+  &-button {
+    &:horizontal:start:decrement,
+    &:horizontal:end:increment,
+    &:vertical:start:decrement,
+    &:vertical:end:increment {
+      display: block;
+    }
+
+    &:vertical {
+      height: var(--sys-sb-btn-size);
+      background-repeat: no-repeat;
+
+      &:start {
+        background-image: url("./icon/scrollbar-up.svg");
+
+        &:active {
+          background-image: url("./icon/scrollbar-up-active.svg");
+        }
+      }
+
+      &:end {
+        background-image: url("./icon/scrollbar-down.svg");
+
+        &:active {
+          background-image: url("./icon/scrollbar-down-active.svg");
+        }
+      }
+    }
+
+    &:horizontal {
+      width: var(--sys-sb-btn-size);
+      background-repeat: no-repeat;
+
+      &:start {
+        background-image: url("./icon/scrollbar-left.svg");
+
+        &:active {
+          background-image: url("./icon/scrollbar-left-active.svg");
+        }
+      }
+
+      &:end {
+        background-image: url("./icon/scrollbar-right.svg");
+
+        &:active {
+          background-image: url("./icon/scrollbar-right-active.svg");
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.combobox {
+  position: relative;
+  display: inline-block;
+
+  input[type="text"] {
+    width: 100%;
+    padding-right: 24px;
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 22px;
+    min-width: 0;
+    height: 100%;
+    min-height: 0;
+    padding: 0;
+    border: 1px solid var(--sys-el-bd);
+    border-image: none;
+    border-radius: 0;
+    background: url("./icon/select-button.svg") no-repeat center, var(--sys-el-bg);
+
+    &:not(:disabled):active {
+      border-radius: 0;
+      background: url("./icon/select-button.svg") no-repeat center, var(--sys-el-bg);
+      filter: invert(1);
+    }
+  }
+}

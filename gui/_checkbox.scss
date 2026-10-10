@@ -1,0 +1,67 @@
+:root {
+  --sys-cb-size: 13px;
+  --sys-cbl-space: 6px; /* cbl = checkbox label */
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin: 0;
+  background: none;
+  border: none;
+  position: fixed;
+  opacity: 0;
+
+  + label {
+    font: var(--sys-font);
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+
+    &::before {
+      content: "";
+      flex: none;
+      width: var(--sys-cb-size);
+      height: var(--sys-cb-size);
+      margin-right: var(--sys-cbl-space);
+      box-sizing: border-box;
+      border: 1px solid var(--sys-el-bd);
+      background: var(--sys-el-bg);
+    }
+
+    &:hover::before {
+      outline: 1px solid var(--sys-el-bd);
+    }
+  }
+
+  &:focus-visible + label::before {
+    outline: 1px solid var(--sys-el-bd);
+  }
+
+  &:checked + label::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 1px;
+    width: 11px;
+    height: 11px;
+    transform: translateY(-50%);
+    background: url("./icon/checkmark.svg") no-repeat center / 11px 11px;
+  }
+
+  &:disabled {
+    + label {
+      color: var(--sys-el-c-d);
+
+      &::before {
+        border-color: var(--sys-el-bd-d);
+        outline: none;
+      }
+    }
+
+    &:checked + label::after {
+      background-image: url("./icon/checkmark-disabled.svg");
+    }
+  }
+}

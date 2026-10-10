@@ -1,0 +1,191 @@
+:root {
+  --sys-mn-left: 20px; /* left gutter of a menu, where checkmarks go */
+}
+
+ul {
+  &[role="menubar"],
+  &[role="menu"] {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    cursor: default;
+    font: var(--sys-font);
+  }
+
+  &[role="menubar"] {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--sys-el-bd);
+    background: var(--sys-surface);
+    color: var(--sys-el-c);
+
+    > [role="menuitem"] {
+      position: relative;
+      padding: 2px 10px;
+
+      &:focus,
+      &:focus-within,
+      &:hover {
+        background: var(--sys-li-bg-hl);
+        color: var(--sys-li-c-hl);
+        outline: none;
+
+        ~ [role="menuitem"]:focus,
+        ~ [role="menuitem"]:focus-within {
+          background: transparent;
+          color: inherit;
+        }
+
+        &:has(~ [role="menuitem"]:hover) {
+          background: transparent;
+          color: inherit;
+        }
+      }
+
+      /* Plain-text / link items with no dropdown */
+      &[aria-haspopup="false"] > * {
+        color: inherit;
+        background: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &[role="menu"] {
+    position: relative;
+    min-width: 200px;
+    background: var(--sys-surface);
+    color: var(--sys-el-c);
+    border: 1px solid var(--sys-el-bd);
+    box-shadow: var(--sys-el-sd);
+
+    [role="menuitem"] & {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      z-index: 99;
+    }
+
+    & [role="menuitem"] > [role="menu"] {
+      top: -1px;
+      left: 100%;
+    }
+
+    > [role="menuitem"] {
+      > a,
+      > button,
+      > label,
+      &[aria-haspopup="true"] {
+        all: unset;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 2px 16px 2px var(--sys-mn-left);
+        box-sizing: border-box;
+        white-space: nowrap;
+        font: var(--sys-font);
+
+        &:hover,
+        &:focus-visible {
+          background: var(--sys-li-bg-hl);
+          color: var(--sys-li-c-hl);
+        }
+      }
+
+      &[aria-haspopup="true"]::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 4px;
+        transform: translateY(-50%);
+        border: 5px solid transparent;
+        border-right-width: 0;
+        border-left-color: currentColor;
+      }
+    }
+  }
+
+  [role="menuitem"] {
+    position: relative;
+
+    /* Checkable items: checkmark in the left gutter */
+    > input[type] {
+      display: none;
+
+      + label::before {
+        content: none;
+      }
+
+      &:checked + label::after {
+        content: "\2713";
+        position: absolute;
+        left: 5px;
+        top: 50%;
+        width: auto;
+        height: auto;
+        transform: translateY(-50%);
+        background: none;
+      }
+
+      &[type="radio"]:checked + label::after {
+        content: "\25C6";
+      }
+    }
+
+    &:focus,
+    &:focus-within {
+      > [role="menu"] {
+        display: block;
+      }
+
+      &:has(~ [role="menuitem"]:hover) > [role="menu"] {
+        display: none;
+      }
+    }
+
+    &[aria-disabled] {
+      color: var(--sys-el-c-d);
+      pointer-events: none;
+
+      > * {
+        color: var(--sys-el-c-d);
+      }
+    }
+
+    /* Dotted separator below the item */
+    &.has-divider::after {
+      content: "";
+      pointer-events: none;
+      display: block;
+      margin: 1px 0;
+      border-top: 1px dotted var(--sys-el-bd);
+    }
+
+    img {
+      position: absolute;
+      z-index: 1;
+      left: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+  }
+
+  &.can-hover [role="menuitem"]:hover {
+    > [role="menu"] {
+      display: block;
+    }
+
+    ~ [role="menuitem"]:focus,
+    ~ [role="menuitem"]:focus-within {
+      background: transparent;
+      color: inherit;
+
+      > [role="menu"] {
+        display: none;
+      }
+    }
+  }
+}

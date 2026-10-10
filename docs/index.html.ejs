@@ -4,7 +4,7 @@
   <title>system.css | A design system for building retro Apple-inspired interfaces</title>
   <link rel="Shortcut Icon" type="image/x-icon" href="icon.png" />
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta property="og:title" content="system.css" />
   <meta name="Description" content="A design system for building retro Apple interfaces" />
@@ -14,622 +14,742 @@
   <link rel="stylesheet" href="docs.css">
 </head>
 <body ontouchstart>
-  <div class="container">
-    <div class="layout">
-      <p class="col col-main">
-        <aside class="window sidebar">
-          <div class="title-bar">
-            <button aria-label="Close" class="close"></button>
-            <h1 class="title">Docs</h1>
-            <button aria-label="Resize" class="resize"></button>
-          </div>
-          <div class="separator"></div>
-          <div class="window-pane">
-            <ul class="menu-items">
-              <li><a href="#intro">Intro</a></li>
-              <li>Components
-                  <ul>
-                    <li><a href="#buttons">Buttons</a></li>
-                    <li><a href="#radio-buttons">Radio Buttons</a></li>
-                    <li><a href="#checkboxes">Checkboxes</a></li>
-                    <li><a href="#menu-bar">Menu Bar</a></li>
-                    <li><a href="#select-menu">Select Menu</a></li>
-                    <li><a href="#text-box">Text Box</a></li>
-                  </ul>
-                </li>
-              <li>Windows
-                <ul>
-                  <li><a href="#title-bar">Title Bar</a></li>
-                  <li><a href="#window-contents">Window Contents</a></li>
-                  <li><a href="#dialogs">Dialogs</a></li>
-                </ul>
-              </li>
-              <li><a href="#contributing">Contributing, Credits, etc.</a></li>
-              <li>Sponsors
-                <ul>
-                  <li><a href="https://getcssscan.com/?ref=systemcss" target="_blank">Get CSS Scan browser extension</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </aside>
-
-      </p>
-      <p class="col col-complementary" role="complementary">
-        <div class="standard-dialog">
-          <p class="heading center">System.css</p>
-            <p class="desc center">A design system for building retro <span role="img" class="apple" aria-label="Apple"></span>-inspired interfaces</p>
-
-          <h2 class="subheading" id="intro">Intro</h2>
-            <p>System.css is a CSS library for building interfaces that resemble Apple's System OS which ran from 1984-1991. Design-wise, not much really changed from System 1 to System 6; however this library is based on System 6 as it was the final monochrome version of MacOS.</p>
-
-            <p>Fortunately, this library does not use any JavaScript and is compatible with any front-end framework of your choice. Most styles can also be overwritten to allow for deeper customization.</p>
-
-            <h2 class="subheading">Components</h2>
-
-            <section class="component">
-              <h3 class="subheading" id="buttons">Buttons</h3>
-              <div style="padding-left: 20px;">
-                <blockquote>
-                  A button is a rounded rectangle that is named with text. Clicking a button performs the action described by the button's name.
-                  <footer>&mdash; Apple HI Guidelines, p. 204</footer>
-                </blockquote>
-
-                <p>A standard button measures 59px wide and 20px tall. We use the <code>.btn</code> class for these buttons</p>
-
-                <%- example(`
-                <button class="btn">Cancel</button>
-                <button class="btn">Submit</button>
-
-                `)%>
-
-                <p>When pressed, buttons invert. The button below is stimulated to be in the active state.</p>
-
-                <%- example(`
-                <button [[class="btn active"]]>Active</button>
-
-                `)%>
-
-                <p>Buttons can also have dynamic widths.</p>
-
-                <%- example(`
-                <button class="btn">Buttons can be long!!</button>
-
-                `)%>
-
-                <p>Or even have a default choice.</p>
-
-                <%- example(`
-                <button class="btn">Cancel</button>
-                <button class="btn btn-default">Find</button>
-
-                `)%>
-
-                <p>Disabled buttons look the same as standard buttons, but with grey button text. Add the <code>disabled</code> attribute to use it.</p>
-
-                <%- example(`
-                <button class="btn" disabled>Disabled</button>
-
-                `)%>
-
-
-                <!--<p>Default buttons have an extra border around them. Add the <code>disabled</code> attribute to use it.</p>
-
-                <div class="example">
-                  <span class="default">
-                    <button [[ class="btn"]]>Default</button>
-                  </span>
-                </div> -->
-              </div>
-
-
-            </section>
-
-            <section class="component">
-              <h3 class="subheading" id="radio-buttons">Radio Buttons</h3>
-              <div style="padding-left: 20px;">
-                <blockquote>
-                  A radio button is a Macintosh control that displays a setting, either on or off, and is part of a group in which only one button can be on at a time.
-                  <footer>&mdash; Apple HI Guidelines, p. 210</footer>
-                </blockquote>
-
-                <p>Radio Buttons can be rendered by specifying a <code>radio</code> type on an <code>input</code> tag and assigning it a name.</p>
-
-                <%- example(`
-                  <div class="field-row">
-                    <input id="radio1" type="radio" name="first-example">
-                    <label for="radio1">Left</label>
-                  </div>
-                  <div class="field-row">
-                    <input id="radio2" type="radio" name="first-example">
-                    <label for="radio2">Center</label>
-                  </div>
-                  <div class="field-row">
-                    <input id="radio3" type="radio" name="first-example">
-                    <label for="radio3">Right</label>
-                </div>
-
-                `)%>
-
-
-              </div>
-            </section>
-
-            <section class="component">
-              <h3 class="subheading" id="checkboxes">Checkboxes</h3>
-              <div style="padding-left: 20px;">
-                <blockquote>
-                  Checkboxes, like radio buttons, provide alternative choices for users. A
-                  checkbox is a square with label text next to it
-                  <footer>&mdash; Apple HI Guidelines, p. 211</footer>
-                </blockquote>
-
-                <p>Checkboxes can be rendered by specifying a <code>checkbox</code> type on an <code>input</code> tag and assigning it a name.</p>
-
-                <%- example(`
-                  <div class="field-row">
-                    <input id="checkbox${getNewId()}" type="checkbox" name="chbx-example">
-                    <label for="checkbox${getCurrentId()}">Left</label>
-                  </div>
-                  <div class="field-row">
-                    <input id="checkbox${getNewId()}" type="checkbox" name="chbx-example">
-                    <label for="checkbox${getCurrentId()}">Center</label>
-                  </div>
-                  <div class="field-row">
-                    <input id="checkbox${getNewId()}" type="checkbox" name="chbx-example">
-                    <label for="checkbox${getCurrentId()}">Right</label>
-                </div>
-
-                `)%>
-
-
-              </div>
-            </section>
-
-
-            <section class="component">
-              <h3 class="subheading" id="menu-bar">Menu Bar</h3>
-              <div style="padding-left: 20px;">
-                <blockquote>
-                  The menu bar extends across the top of the screen and contains words and
-                  icons that serve as the title of each menu
-                  <footer>&mdash; Apple HI Guidelines, p. 52</footer>
-                </blockquote>
-
-                <p>A menu bar consists of menu elements that name menu items and they typically have a dropdown menu associated with them.</p>
-                
-                <p>To create a menu bar we will use the <code>.menu-bar</code> class. </p>
-
-                <%- example(`
-                <ul role="menu-bar">
-                  <li role="menu-item" tabindex="0" aria-haspopup="true">
-                    File
-                    <ul role="menu">
-                      <li role="menu-item"><a href="#menu">Action</a></li>
-                      <li role="menu-item"><a href="#menu">Another Action</a></li>
-                      <li role="menu-item" class="divider"><a href="#menu">Something else here</a></li>
-                      <li role="menu-item"><a href="https://twitter.com/sakofchit">sakun's twitter</a></li>
-                    </ul>
-                  </li>
-                  <li role="menu-item" tabindex="0" aria-haspopup="true">
-                    Edit
-                    <ul role="menu">
-                      <li role="menu-item"><a href="#menu">Action</a></li>
-                      <li role="menu-item"><a href="#menu">Another Action</a></li>
-                      <li role="menu-item" class="divider"><a href="#menu">Something else here</a></li>
-                      <li role="menu-item"><a href="https://sakun.co">sakun's projects</a></li>
-                    </ul>
-                  </li>
-                  <li role="menu-item" tabindex="0" aria-haspopup="true">
-                    View
-                    <ul role="menu">
-                      <li role="menu-item"><a href="#menu">Action</a></li>
-                      <li role="menu-item"><a href="#menu">Another Action</a></li>
-                      <li role="menu-item"><a href="#menu">Something else here</a></li>
-                    </ul>
-                  </li>
-                  <li role="menu-item" tabindex="0" aria-haspopup="true">
-                    Special
-                    <ul role="menu">
-                      <li role="menu-item"><a href="#menu">You</a></li>
-                      <li role="menu-item"><a href="#menu">Get the</a></li>
-                      <li role="menu-item"><a href="#menu">Idea</a></li>
-                    </ul>
-                  </li>
-                </ul>
-                `)%>
-
-                <p>In case of a menu item as a single children or plain text with no menu dropdown associated with it, use <code>aria-haspopup="false"</code> attribute.</p>
-                <%- example(`
-                  <ul role="menu-bar">
-                    <li role="menu-item" tabindex="0" aria-haspopup="false">Single Item</li>
-                    <li role="menu-item" tabindex="0" aria-haspopup="false"><a target="_blank" href="https://github.com/sakofchit/system.css">System.css on GitHub</a></li>
-                  </ul>
-                `)%>
-
-                <p>We can also manipulate a menu bar into a standard dropdown.</p>
-
-                <%- example(`
-                <ul role="menu-bar">
-                  <li role="menu-item" tabindex="0" aria-haspopup="true">
-                    Dropdown
-                    <ul role="menu">
-                      <li role="menu-item"><a href="#menu">Action</a></li>
-                      <li role="menu-item"><a href="#menu">Another Action</a></li>
-                      <li role="menu-item" class="divider"><a href="#menu">Something else here</a></li>
-                      <li role="menu-item"><a href="https://twitter.com/sakofchit">sakun's twitter</a></li>
-                    </ul>
-                  </li>
-                </ul>
-                `)%>
-              </div>
-            </section>
-
-
-            <section class="component">
-              <h3 class="subheading" id="select-menu">Select Menu</h3>
-              <div style="padding-left: 20px;">
-                <blockquote>
-                  A select menu can be used to create a drop-down list, typically used in forms.
-                </blockquote>
-
-                <p>Select menus can be rendered using the <code>select</code> and <code>option</code> elements.</p>
-
-                <%- example(`
-                  <select>
-                    <option>name</option>
-                    <option>age</option>
-                    <option>date of birth</option>
-                  </select>
-                `)%>
-
-                <p>By default the first option will be selected, but you can change that by adding the <code>selected</code> attribute to an <code>option</code></p>
-
-                <%- example(`
-                  <select>
-                    <option>name</option>
-                    <option>age</option>
-                    <option selected>date of birth</option>
-                  </select>
-                `)%>
-              </div>
-            </section>
-
-            <section class="component">
-              <h3 class="subheading" id="text-box">Text Box</h3>
-              <div style="padding-left: 20px;">
-                <blockquote>
-                  The place or places in a dialog box where information can be typed. Also called text entry field.
-                  <footer>&mdash; Apple HI Guidelines, p. 372</footer>
-                </blockquote>
-
-                <p>Text Boxes can be rendered by specifying a <code>text</code> type on an <code>input</code> tag</p>
-
-                <%- example(`
-                <input aria-label="Example text box" type="text" placeholder="some cool text"/>
-                `)%>
-
-                <p>Other types of text are also supported</p>
-
-                <%- example(`
-                <form>
-                  <label for="text_email">Email</label><br>
-                  <input id="text_email" type="email" placeholder="panic@thedis.co"/><br>
-                  <label for="text_pwd">Password</label><br>
-                  <input id="text_pwd" type="password" placeholder="password"/><br><br>
-                </form>
-                `)%>
-
-
-              </div>
-            </section>
-
-
-            <section class="component">
-              <h2 class="subheading" id="windows">Windows</h2>
-              <div style="padding-left: 20px;">
-                <blockquote>
-                  Standard document windows have standard structural components.
-                  These components include the title bar, size box, close box, zoom box,
-                  and scroll bars. Windows are designed for visual consistency across all monitors
-                  <footer>&mdash; Apple HI Guidelines, p. 134, 159</footer>
-                </blockquote>
-              </div>
-            </section>
-
-
-
-            <section class="component">
-              <h3 class="subheading" id="title-bar">Title Bar</h3>
-              <div style="padding-left: 20px;">
-
-                <blockquote>
-                  A standard title bar is at least 19px tall, has a close button, caption, and racing stripes.
-                </blockquote>
-
-                <p>They're usually a part of a window. Title bars use the Chicago 12pt font.</p>
-
-                <%- example(`
-
-                <div class="window">
-                  <div class="title-bar">
-                    <button aria-label="Close" class="close"></button>
-                    <h1 class="title">A Title Bar</h1>
-                    <button aria-label="Resize" disabled class="hidden"></button>
-                  </div>
-                </div>
-
-                `)%>
-
-                <p>Title bars can look different depending on what they're intended for.</p>
-
-                <%- example(`
-
-                <div class="window">
-                  <div class="title-bar">
-                    <button aria-label="Close" class="close"></button>
-                    <h1 class="title">Also a Title Bar</h1>
-                    <button aria-label="Resize" class="resize"></button>
-                  </div>
-                </div>
-                <div class="window">
-                  <div class="title-bar">
-                    <h1 class="title">Dialog Title</h1>
-                  </div>
-                </div>
-
-                `)%>
-
-                <p>You can also set a title bar to be inactive by applying the <code>.inactive-title-bar</code> class</p>
-
-                <%- example(`
-
-                <div class="window">
-                  <div class="inactive-title-bar">
-
-                    <h1 class="title">Inactive Title Bar</h1>
-
-                  </div>
-                </div>
-
-                `)%>
-
-              </div>
-            </section>
-
-
-
-            <section class="component">
-              <h3 class="subheading" id="window-contents">Window Contents</h3>
-              <div style="padding-left: 20px;">
-
-                <blockquote>
-                  Document windows present a view into the content that people create and store.
-                  <footer>&mdash; Apple HI Guidelines, p. 134</footer>
-                </blockquote>
-
-                <p>This is a window (without stuff in it). To create a basic window, we simply use the <code>.window</code> class.</p>
-
-                <%- example(`
-
-                <div class="window scale-down">
-                  <div class="title-bar">
-                    <button aria-label="Close" class="close"></button>
-                    <h1 class="title">Window Without Stuff</h1>
-                    <button aria-label="Resize" class="resize"></button>
-                  </div>
-                </div>
-
-                `)%>
-
-
-                <p>This is a window with stuff in it. We can achieve this by simply adding a div with the <code>.window-pane</code> below the title bar.</p>
-
-                <%- example(`
-
-                <div class="window">
-                  <div class="title-bar">
-                    <button aria-label="Close" class="close"></button>
-                    <h1 class="title">Window With Stuff</h1>
-                    <button aria-label="Resize" class="resize"></button>
-                  </div>
-                  <div class="separator"></div>
-
-                  <div class="window-pane">
-                    Woo I got stuff in me!
-                  </div>
-                </div>
-
-                `)%>
-
-
-
-                <p>You can also add a details bar to a window by adding<code>.details-bar</code> below the title bar.</p>
-
-                <%- example(`
-
-                <div class="window">
-                  <div class="title-bar">
-                    <button aria-label="Close" class="close"></button>
-                    <h1 class="title">Window With Details</h1>
-                    <button aria-label="Resize" class="resize"></button>
-                  </div>
-                  <div class="details-bar">
-                    <span>some</span>
-                    <span>more</span>
-                    <span>details</span>
-                  </div>
-
-                  <div class="window-pane">
-                    Woo I got a details bar.
-                  </div>
-                </div>
-
-                `)%>
-
-                <p>You can also create an inactive window using an inactive title bar.</p>
-
-                <%- example(`
-                  <div class="window">
-                    <div class="inactive-title-bar">
-                      <h1 class="title">Inactive Window</h1>
-                    </div>
-                    <div class="details-bar">
-                      <span>some</span>
-                      <span>more</span>
-                      <span>details</span>
-                    </div>
-
-                    <div class="window-pane">
-                      not active :(
-                    </div>
-                  </div>
-                `)%>
-
-
-              </div>
-            </section>
-
-            <section class="component">
-              <h3 class="subheading" id="dialogs">Dialogs</h3>
-              <div style="padding-left: 20px;">
-                <blockquote>
-                  Dialog boxes are windows that provide a standard framework in which the
-                  computer can present alternatives from which the user can choose.
-                  <footer>&mdash; Apple HI Guidelines, p. 176</footer>
-                </blockquote>
-
-                <p>
-                  A basic dialog is just a box with text in it. We use the <code>.standard-dialog</code> class here.
-                </p>
-
-                <%- example(`
-
-                <div class="standard-dialog center scale-down" style="width:30rem;">
-                  <h1 class="dialog-text">The Macintosh Finder, Version 1.0 (18 Jan 84)</h1>
-                  <p class="dialog-text">&copy; 1984 Apple Computer</p>
-                </div>
-
-
-                `)%>
-
-                <p>
-                  A modeless dialog box looks like a window without a size box, zoom box, or
-                  scroll bars.
-                </p>
-
-                <%- example(`
-                <div class="window scale-down" style="width:30rem;">
-                  <div class="title-bar">
-                    <button aria-label="Close" class="close"></button>
-                    <h1 class="title">Modeless Dialog</h1>
-                    <button aria-label="Resize" disabled class="hidden"></button>
-                  </div>
-                  <div class="separator"></div>
-
-                  <div class="modeless-dialog">
-                    <section class="field-row" style="justify-content: flex-start">
-                      <label for="text_find" class="modeless-text">Find:</label>
-                      <input id="text_find" type="text" style="width:100%;" placeholder=""/>
-                    </section>
-                    <section class="field-row" style="justify-content: flex-end">
-                      <button class="btn">Cancel</button>
-                      <button class="btn" style="width:95px;">Find</button>
-                    </section>
-                  </div>
-                </div>
-                `)%>
-
-                <p>
-                  We can also have a modal dialog box, which typically has some interactive component within it. It has a double-outline border. We achieve this by using a nested <code>div</code>. The outer <code>div</code> uses the <code>.outer-border</code> class and the <code>.inner-border</code> for the inner <code>div</code>.
-                </p>
-
-                <%- example(`
-                <div class="modal-dialog outer-border" style="width: 30rem;">
-                  <div class="inner-border center">
-                    <div class="modal-contents">
-                      <h1 class="modal-text">Modal Dialog</h1>
-                      <div style="padding-left: 20px;">
-                        <div class="field-row">
-                          <input id="radio${getNewId()}" type="radio" name="second-example">
-                          <label for="radio${getCurrentId()}">Room</label>
-                        </div>
-                        <div class="field-row">
-                          <input id="radio${getNewId()}" type="radio" name="second-example">
-                          <label for="radio${getCurrentId()}">For</label>
-                        </div>
-                        <div class="field-row">
-                          <input id="radio${getNewId()}" type="radio" name="second-example">
-                          <label for="radio${getCurrentId()}">Stuff</label>
-                        </div>
-
-                      </div>
-                      <section class="field-row" style="justify-content: flex-end">
-                        <button class="btn">Cancel</button>
-                        <button class="btn" style="width:95px;">OK</button>
-                      </section>
-
-                    </div>
-
-                  </div>
-                </div>
-                `)%>
-
-
-                <blockquote>
-                  Alert boxes appear when the system software or an application needs to
-                  communicate information to the user. Alert boxes provide messages about
-                  error conditions and warn users about potentially hazardous situations or
-                  actions
-                  <footer>&mdash; Apple HI Guidelines, p. 176</footer>
-                </blockquote>
-
-                <p>Like modal dialogs, alert boxes also have a double-outline frame. The empty square is where you'd place an icon.</p>
-
-                <%- example(`
-                <div class="alert-box outer-border scale-down"  style="width:30rem;">
-                  <div class="inner-border">
-                    <div class="alert-contents" style="padding-left: 30px; padding-right:20px;">
-                      <section class="field-row" style="justify-content: flex-start">
-                        <div class="square"></div>
-                        <p class="alert-text" style="padding-left:10px;">This is a standard alert box. The text would be placed here.
-                          This is where more text appears</p>
-                      </section>
-                      <section class="field-row" style="justify-content: flex-end">
-                        <button class="btn">Cancel</button>
-                        <button class="btn" style="width:95px;">OK</button>
-                      </section>
-
-                    </div>
-
-                  </div>
-                </div>
-                `)%>
-              </div>
-            </section>
-
-            <h2 class="subheading" id="contributing">Contributing, Credits, etc.</h2>
-
-            <section class="component">
-              <div>
-                <p>Thanks for checking this project out! This library was made in good fun and was largely inspired by <a href="https://github.com/jdan/98.css" target="_blank">98.css</a>. The <a href="http://www.suppertime.co.uk/blogmywiki/2017/04/chicago/" target="_blank">Chicago 12pt</a> and <a href="http://www.suppertime.co.uk/blogmywiki/2017/04/finderskeepers/" target="_blank">Geneva 9pt</a> fonts are recreations by <a href="https://twitter.com/blogmywiki" target="_blank">@blogmywiki</a></p>
-
-                <p>System.css is still in beta! There's a few things that are currently missing that I incline on adding pretty soon. I recreated components based on Apple's Human Interface Guidelines. However, there's still a pretty good chance that I've might've missed/overlooked something essential. I've also had to recreate most of the assets, which can also be found <a href="https://github.com/sakofchit/system.css/tree/main/icon">here</a>.</p>
-
-                <p>If you find a bug, consider opening an issue <a href="https://github.com/sakofchit/system.css/issues">here</a>. If there's something that you'd like to add, please feel free to create a PR!</p>
-
-                <p>If you'd like to see what else I'm up to, consider following me on <a href="https://twitter.com/sakofchit" target="_blank">Twitter</a> or checking out my <a href="https://sakun.co" target="_blank">personal site</a> :)</p>
-              </div>
-            </section>
-
-            <h2 class="subheading">Sponsors</h2>
-
-            <p><a href="https://getcssscan.com/?ref=systemcss" target="_blank">CSS Scan</a>: The fastest and easiest way to check, copy and edit CSS</p>
-
+  <div class="layout">
+    <aside class="window active sidebar">
+      <div class="title-bar">
+        <div class="title-bar-text">Docs</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+          <button aria-label="Maximize"></button>
         </div>
       </div>
-    </p>
+      <div class="window-body has-scrollbar">
+        <ul class="menu-items">
+          <li><a href="#intro">Intro</a></li>
+          <li><a href="#install">Install</a></li>
+          <li>Components
+            <ul>
+              <li><a href="#balloon">Balloon</a></li>
+              <li><a href="#button">Button</a></li>
+              <li><a href="#checkbox">Checkbox</a></li>
+              <li><a href="#collapse">Collapse</a></li>
+              <li><a href="#combobox">Combobox</a></li>
+              <li><a href="#dropdown">Dropdown</a></li>
+              <li><a href="#groupbox">Groupbox</a></li>
+              <li><a href="#listbox">Listbox</a></li>
+              <li><a href="#listview">Listview</a></li>
+              <li><a href="#menu">Menu &amp; Menubar</a></li>
+              <li><a href="#progressbar">Progress Bar</a></li>
+              <li><a href="#radio">Radio Button</a></li>
+              <li><a href="#scrollbar">Scrollbar</a></li>
+              <li><a href="#searchbox">Search Box</a></li>
+              <li><a href="#slider">Slider</a></li>
+              <li><a href="#spinner">Spinner</a></li>
+              <li><a href="#tabs">Tabs</a></li>
+              <li><a href="#textbox">Text Box</a></li>
+              <li><a href="#treeview">Tree View</a></li>
+              <li><a href="#typography">Typography</a></li>
+            </ul>
+          </li>
+          <li>Window
+            <ul>
+              <li><a href="#title-bar">Title Bar</a></li>
+              <li><a href="#window-body">Body &amp; Footer</a></li>
+              <li><a href="#status-bar">Status Bar</a></li>
+              <li><a href="#dialog">Dialog</a></li>
+            </ul>
+          </li>
+          <li><a href="#extras">Extras</a></li>
+          <li><a href="#contributing">Contributing, Credits</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="window active">
+      <div class="window-body has-space">
+        <p class="heading center">System.css</p>
+        <p class="desc center">A design system for building retro <span role="img" class="apple" aria-label="Apple"></span>-inspired interfaces</p>
+
+        <h2 class="subheading" id="intro">Intro</h2>
+        <p>System.css is a CSS library for building interfaces that resemble Apple's System OS which ran from 1984-1991. Design-wise, not much really changed from System 1 to System 6; this library is based on System 6, the final monochrome version of MacOS. Where System 6 had no such widget (tabs, sliders, balloons), components borrow from System 7 or are drawn in the same 1-bit visual language.</p>
+        <p>It uses no JavaScript and shares its markup with <a href="https://github.com/jdan/98.css">98.css</a>, <a href="https://github.com/khang-nd/7.css">7.css</a> and friends: the same HTML renders as a Mac here.</p>
+
+        <h2 class="subheading" id="install">Installation / Usage</h2>
+        <p>The package ships four builds:</p>
+        <ul>
+          <li><code>dist/system.css</code>: everything, CSS variables kept live for theming.</li>
+          <li><code>dist/system.scoped.css</code>: every selector scoped under <code>.sys</code>, so it only applies inside <code>&lt;div class="sys"&gt;</code>.</li>
+          <li><code>dist/system.inline.css</code>: variables resolved to plain values, for old browsers.</li>
+          <li><code>dist/gui/&lt;component&gt;.css</code>: one file per component, variables resolved.</li>
+        </ul>
+        <p>
+          <a href="https://www.npmjs.com/package/@vstyler96/system.css" rel="nofollow"><img alt="npm" src="https://img.shields.io/npm/v/@vstyler96/system.css"></a>
+          <a href="https://www.npmjs.com/package/@vstyler96/system.css" rel="nofollow"><img alt="npm downloads" src="https://img.shields.io/npm/dt/@vstyler96/system.css"></a>
+        </p>
+        <pre><code>npm install @vstyler96/system.css</code></pre>
+        <pre><code>import "@vstyler96/system.css/dist/system.css";</code></pre>
+        <pre><code>&lt;link rel="stylesheet" href="https://unpkg.com/@vstyler96/system.css@2/dist/system.css" /&gt;</code></pre>
+        <p>Theme by overriding the variables, e.g. <code>:root { --sys-secondary: #224; }</code>. All of them start with <code>--sys-</code>.</p>
+
+        <h2 class="subheading">Components</h2>
+
+        <section class="component">
+          <h3 id="balloon">Balloon</h3>
+          <blockquote>
+            Balloon Help lets users find out what an object is and what it does by pointing at it.
+            <footer>&mdash; Inside Macintosh: More Macintosh Toolbox</footer>
+          </blockquote>
+          <p>Use <code>role="tooltip"</code>. The tail sits top-left by default; move it with <code>.is-top</code> (balloon above its target) and <code>.is-left</code> (balloon left of its target).</p>
+          <%- example(`
+          <div role="tooltip">The Trash holds items you want to throw away.</div>
+          <br><br>
+          <div role="tooltip" class="is-top is-left">Tail at the bottom right.</div>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="button">Button</h3>
+          <blockquote>
+            A button is a rounded rectangle that is named with text. Clicking a button performs the action described by the button's name.
+            <footer>&mdash; Apple HI Guidelines, p. 204</footer>
+          </blockquote>
+          <p>A standard button measures 59px wide and 20px tall. Any <code>button</code> gets the style.</p>
+          <%- example(`
+          <button>Cancel</button>
+          <button>Buttons can be long!!</button>
+          `) %>
+          <p>When pressed, buttons invert. <code>.active</code> forces that state; <code>.focused</code> forces the focus ring.</p>
+          <%- example(`
+          <button [[class="active"]]>Active</button>
+          <button [[class="focused"]]>Focused</button>
+          `) %>
+          <p>The default button has a thick outer ring. Use <code>.default</code>.</p>
+          <%- example(`
+          <button>Cancel</button>
+          <button [[class="default"]]>Find</button>
+          `) %>
+          <p>Disabled buttons have grey text.</p>
+          <%- example(`
+          <button disabled>Disabled</button>
+          `) %>
+          <p>File inputs and <code>label[role=button]</code> look the same.</p>
+          <%- example(`
+          <input type="file">
+          <label role="button">Upload <input type="file"></label>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="checkbox">Checkbox</h3>
+          <blockquote>
+            Checkboxes, like radio buttons, provide alternative choices for users. A checkbox is a square with label text next to it.
+            <footer>&mdash; Apple HI Guidelines, p. 211</footer>
+          </blockquote>
+          <p>An <code>input[type=checkbox]</code> followed by its <code>label</code>.</p>
+          <%- example(`
+          <div class="field-row">
+            <input id="checkbox${getNewId()}" type="checkbox" checked>
+            <label for="checkbox${getCurrentId()}">Show disk info</label>
+          </div>
+          <div class="field-row">
+            <input id="checkbox${getNewId()}" type="checkbox">
+            <label for="checkbox${getCurrentId()}">Use small icons</label>
+          </div>
+          <div class="field-row">
+            <input id="checkbox${getNewId()}" type="checkbox" checked disabled>
+            <label for="checkbox${getCurrentId()}">Disabled</label>
+          </div>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="collapse">Collapse</h3>
+          <p>A <code>details</code> / <code>summary</code> pair gets a disclosure triangle.</p>
+          <%- example(`
+          <details>
+            <summary>More options</summary>
+            <p>Hidden until opened.</p>
+          </details>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="combobox">Combobox</h3>
+          <p>A text input with a pop-up button: <code>.combobox</code> &gt; <code>input[type=text]</code> + <code>button</code>.</p>
+          <%- example(`
+          <div class="combobox">
+            <input type="text" aria-label="Font" value="Chicago">
+            <button aria-label="Show fonts"></button>
+          </div>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="dropdown">Dropdown</h3>
+          <blockquote>
+            A pop-up menu is a menu that is not in the menu bar but appears on the screen when the user presses the mouse button on a particular spot.
+            <footer>&mdash; Apple HI Guidelines</footer>
+          </blockquote>
+          <%- example(`
+          <select>
+            <option>name</option>
+            <option>age</option>
+            <option selected>date of birth</option>
+          </select>
+          <select disabled><option>Disabled</option></select>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="groupbox">Groupbox</h3>
+          <p>A <code>fieldset</code> with a <code>legend</code>. Lay out its contents with <code>.field-row</code> (label beside control) or <code>.field-row-stacked</code> (label above).</p>
+          <%- example(`
+          <fieldset>
+            <legend>Startup Disk</legend>
+            <div class="field-row">
+              <input id="radio${getNewId()}" type="radio" name="gb" checked>
+              <label for="radio${getCurrentId()}">Internal HD</label>
+            </div>
+            <div class="field-row">
+              <input id="radio${getNewId()}" type="radio" name="gb">
+              <label for="radio${getCurrentId()}">Floppy</label>
+            </div>
+            <div class="field-row-stacked">
+              <label for="text${getNewId()}">Disk name</label>
+              <input id="text${getCurrentId()}" type="text" value="Macintosh HD">
+            </div>
+          </fieldset>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="listbox">Listbox</h3>
+          <p><code>[role=listbox]</code> with <code>[role=option]</code> items, or <code>select[multiple]</code>. Mark the selection with <code>aria-selected</code>. <code>.has-hover</code> highlights on hover, <code>.has-shadow</code> adds a drop shadow.</p>
+          <%- example(`
+          <ul role="listbox" class="has-hover has-shadow" style="width: 200px">
+            <li role="option">Finder</li>
+            <li role="option" aria-selected="true">System</li>
+            <li role="option">Scrapbook File</li>
+            <li role="option">Clipboard File</li>
+          </ul>
+          <br>
+          <select multiple style="width: 200px">
+            <option>Chicago</option>
+            <option selected>Geneva</option>
+            <option>Monaco</option>
+          </select>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="listview">Listview</h3>
+          <p>A <code>table</code>. Mark the sort column with <code>th.highlighted</code>, add a sort caret with <code>.indicator</code> (<code>.indicator.up</code> for ascending), highlight rows with <code>tr.highlighted</code>.</p>
+          <%- example(`
+          <table class="has-shadow">
+            <thead>
+              <tr>
+                <th class="highlighted indicator">Name</th>
+                <th>Size</th>
+                <th>Kind</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Finder</td><td>45K</td><td>system document</td></tr>
+              <tr class="highlighted"><td>System</td><td>210K</td><td>system document</td></tr>
+              <tr><td>MacPaint</td><td>59K</td><td>application</td></tr>
+            </tbody>
+          </table>
+          `) %>
+          <p>Modifiers: <code>.is-striped</code> dithers every other row, <code>.has-hover</code> inverts the row under the pointer, <code>.is-full</code> fills the width, and <code>.is-center</code> on a <code>th</code>/<code>td</code> centres it. A <code>tr.highlighted</code> row stays highlighted.</p>
+          <%- example(`
+          <table [[class="is-striped has-hover is-full"]]>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th [[class="is-center"]]>Size</th>
+                <th>Kind</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Finder</td><td class="is-center">45K</td><td>system document</td></tr>
+              <tr><td>System</td><td class="is-center">210K</td><td>system document</td></tr>
+              <tr class="highlighted"><td>MacPaint</td><td class="is-center">59K</td><td>application</td></tr>
+              <tr><td>MacWrite</td><td class="is-center">78K</td><td>application</td></tr>
+              <tr><td>Scrapbook File</td><td class="is-center">12K</td><td>document</td></tr>
+            </tbody>
+          </table>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="menu">Menu &amp; Menubar</h3>
+          <blockquote>
+            The menu bar extends across the top of the screen and contains words and icons that serve as the title of each menu.
+            <footer>&mdash; Apple HI Guidelines, p. 52</footer>
+          </blockquote>
+          <p><code>ul[role=menubar]</code> &gt; <code>li[role=menuitem]</code> &gt; <code>ul[role=menu]</code> &gt; <code>li[role=menuitem]</code>. Menus open on focus; add <code>.can-hover</code> to open them on hover. <code>.has-divider</code> draws a dotted line under an item, <code>aria-disabled</code> greys it out, <code>aria-haspopup="true"</code> marks a submenu.</p>
+          <%- example(`
+          <ul role="menubar" class="can-hover">
+            <li role="menuitem" tabindex="0" aria-haspopup="true">
+              <span role="img" class="apple" aria-label="Apple"></span>
+              <ul role="menu">
+                <li role="menuitem" class="has-divider"><a href="#menu">About the Finder...</a></li>
+                <li role="menuitem"><a href="#menu">Calculator</a></li>
+                <li role="menuitem"><a href="#menu">Control Panel</a></li>
+              </ul>
+            </li>
+            <li role="menuitem" tabindex="0" aria-haspopup="true">
+              File
+              <ul role="menu">
+                <li role="menuitem"><a href="#menu">New Folder</a></li>
+                <li role="menuitem"><a href="#menu">Open</a></li>
+                <li role="menuitem" aria-disabled="true" class="has-divider"><a href="#menu">Print</a></li>
+                <li role="menuitem" tabindex="0" aria-haspopup="true">
+                  Recent
+                  <ul role="menu">
+                    <li role="menuitem"><a href="#menu">Letter</a></li>
+                    <li role="menuitem"><a href="#menu">Budget</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li role="menuitem" tabindex="0" aria-haspopup="true">
+              View
+              <ul role="menu">
+                <li role="menuitem"><input type="radio" name="view" id="view-icon" checked><label for="view-icon">by Icon</label></li>
+                <li role="menuitem"><input type="radio" name="view" id="view-name"><label for="view-name">by Name</label></li>
+                <li role="menuitem"><input type="checkbox" id="view-grid" checked><label for="view-grid">Show Grid</label></li>
+              </ul>
+            </li>
+            <li role="menuitem" tabindex="0" aria-haspopup="false"><a href="https://github.com/sakofchit/system.css">GitHub</a></li>
+          </ul>
+          `) %>
+          <p>A single <code>ul[role=menu]</code> works on its own as a context menu.</p>
+          <%- example(`
+          <ul role="menu" style="width: 200px">
+            <li role="menuitem"><a href="#menu">Undo</a></li>
+            <li role="menuitem" class="has-divider"><a href="#menu">Cut</a></li>
+            <li role="menuitem"><a href="#menu">Copy</a></li>
+            <li role="menuitem"><a href="#menu">Paste</a></li>
+          </ul>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="progressbar">Progress Bar</h3>
+          <p><code>div[role=progressbar]</code> with an inner <code>div</code> whose width is the value. Modifiers: <code>.paused</code>, <code>.error</code>, <code>.animate</code>, and <code>.marquee</code> (indeterminate barber pole, no inner div).</p>
+          <%- example(`
+          <div role="progressbar" aria-valuenow="60"><div style="width: 60%"></div></div>
+          <div role="progressbar" class="paused"><div style="width: 40%"></div></div>
+          <div role="progressbar" class="error"><div style="width: 80%"></div></div>
+          <div role="progressbar" class="animate"><div style="width: 50%"></div></div>
+          <div role="progressbar" class="marquee"></div>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="radio">Radio Button</h3>
+          <blockquote>
+            A radio button is a Macintosh control that displays a setting, either on or off, and is part of a group in which only one button can be on at a time.
+            <footer>&mdash; Apple HI Guidelines, p. 210</footer>
+          </blockquote>
+          <%- example(`
+          <div class="field-row">
+            <input id="radio${getNewId()}" type="radio" name="align" checked>
+            <label for="radio${getCurrentId()}">Left</label>
+          </div>
+          <div class="field-row">
+            <input id="radio${getNewId()}" type="radio" name="align">
+            <label for="radio${getCurrentId()}">Center</label>
+          </div>
+          <div class="field-row">
+            <input id="radio${getNewId()}" type="radio" name="align" disabled>
+            <label for="radio${getCurrentId()}">Disabled</label>
+          </div>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="scrollbar">Scrollbar</h3>
+          <p>Scrollbars are opt-in: add <code>.has-scrollbar</code> to the scrolling element (WebKit/Blink only).</p>
+          <%- example(`
+          <div class="has-scrollbar" style="width: 300px; height: 120px; overflow: auto; border: 1px solid">
+            <div style="width: 500px; padding: 8px">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec pharetra arcu. Sed posuere dignissim magna, at tempus lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Integer id sapien sit amet risus pellentesque luctus.
+            </div>
+          </div>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="searchbox">Search Box</h3>
+          <p><code>input[type=search]</code>, optionally wrapped in <code>.searchbox</code> with a <code>button[aria-label=search]</code>.</p>
+          <%- example(`
+          <input type="search" placeholder="Find...">
+          <br><br>
+          <div class="searchbox">
+            <input type="search" placeholder="Find File">
+            <button aria-label="search"></button>
+          </div>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="slider">Slider</h3>
+          <p><code>input[type=range]</code>. <code>.has-box-indicator</code> uses a rectangular thumb; wrap in <code>.is-vertical</code> for a vertical slider.</p>
+          <%- example(`
+          <div class="field-row" style="width: 300px">
+            <label>Slow</label>
+            <input type="range" min="1" max="7" value="4">
+            <label>Fast</label>
+          </div>
+          <div class="field-row" style="width: 300px">
+            <input type="range" class="has-box-indicator" value="30">
+          </div>
+          <div class="field-row" style="width: 300px">
+            <input type="range" value="60" disabled>
+          </div>
+          <div class="is-vertical">
+            <input type="range" value="50">
+          </div>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="spinner">Spinner</h3>
+          <p>A monochrome spinning wait cursor. Add <code>.animate</code> to spin it.</p>
+          <%- example(`
+          <span class="spinner" aria-label="Loading"></span>
+          <span class="spinner animate" aria-label="Loading"></span>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="tabs">Tabs</h3>
+          <p>System 6 had no tab control, so these are drawn as folder tabs. <code>menu[role=tablist]</code> &gt; <code>button[role=tab]</code>, the selected one with <code>aria-selected="true"</code>, followed by <code>[role=tabpanel]</code>. Add <code>.justified</code> to stretch the tabs.</p>
+          <%- example(`
+          <section class="tabs" style="max-width: 400px">
+            <menu role="tablist" aria-label="Get Info">
+              <button role="tab" aria-controls="tab-general" aria-selected="true">General</button>
+              <button role="tab" aria-controls="tab-memory">Memory</button>
+              <button role="tab" disabled>Sharing</button>
+            </menu>
+            <article role="tabpanel" id="tab-general">Kind: application program</article>
+            <article role="tabpanel" id="tab-memory" hidden>Suggested size: 384K</article>
+          </section>
+          <section class="tabs" style="max-width: 400px">
+            <menu role="tablist" class="justified" aria-label="Justified">
+              <button role="tab" aria-controls="tab-j1" aria-selected="true">Icon</button>
+              <button role="tab" aria-controls="tab-j2">Name</button>
+            </menu>
+            <article role="tabpanel" id="tab-j1">by Icon</article>
+            <article role="tabpanel" id="tab-j2" hidden>by Name</article>
+          </section>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="textbox">Text Box</h3>
+          <blockquote>
+            The place or places in a dialog box where information can be typed. Also called text entry field.
+            <footer>&mdash; Apple HI Guidelines, p. 372</footer>
+          </blockquote>
+          <p>Supported: <code>text</code>, <code>url</code>, <code>email</code>, <code>number</code>, <code>password</code> and <code>textarea</code>. Focus doubles the border.</p>
+          <%- example(`
+          <div class="field-row">
+            <label for="text${getNewId()}">Name</label>
+            <input id="text${getCurrentId()}" type="text" placeholder="Untitled">
+          </div>
+          <div class="field-row">
+            <label for="text${getNewId()}">Password</label>
+            <input id="text${getCurrentId()}" type="password" value="secret">
+          </div>
+          <div class="field-row">
+            <label for="text${getNewId()}">Copies</label>
+            <input id="text${getCurrentId()}" type="number" value="1" style="width: 60px">
+          </div>
+          <div class="field-row">
+            <label for="text${getNewId()}">Disabled</label>
+            <input id="text${getCurrentId()}" type="text" value="Locked" disabled>
+          </div>
+          <div class="field-row-stacked" style="width: 300px">
+            <label for="text${getNewId()}">Comments</label>
+            <textarea id="text${getCurrentId()}" rows="4"></textarea>
+          </div>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="treeview">Tree View</h3>
+          <p><code>ul.tree-view</code>, using <code>details</code> / <code>summary</code> for expandable nodes. Modifiers: <code>.has-container</code> (white box), <code>.has-connector</code> (dotted lines), <code>.has-collapse-button</code> (boxed +/&ndash;).</p>
+          <%- example(`
+          <ul class="tree-view has-container has-connector has-collapse-button" style="width: 260px">
+            <li>
+              <details open>
+                <summary>Macintosh HD</summary>
+                <ul>
+                  <li>
+                    <details open>
+                      <summary>System Folder</summary>
+                      <ul>
+                        <li>Finder</li>
+                        <li>System</li>
+                      </ul>
+                    </details>
+                  </li>
+                  <li>
+                    <details>
+                      <summary>Applications</summary>
+                      <ul>
+                        <li>MacWrite</li>
+                        <li>MacPaint</li>
+                      </ul>
+                    </details>
+                  </li>
+                  <li><a href="#treeview">Read Me</a></li>
+                </ul>
+              </details>
+            </li>
+          </ul>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="typography">Typography</h3>
+          <p><code>.instruction</code> / <code>.instruction-primary</code> for dialog text, <code>.header-document</code> and <code>.header-group</code> for headings. Fonts: <code>--sys-font</code> (Chicago 12), <code>--sys-font-small</code> (Geneva 9), <code>--sys-font-mono</code> (Monaco).</p>
+          <%- example(`
+          <h2 class="instruction instruction-primary">Erase the disk?</h2>
+          <p class="instruction">All information on the disk will be lost.</p>
+          <h1 class="header header-document">Document title</h1>
+          <h2 class="header header-group">Group heading</h2>
+          `) %>
+        </section>
+
+        <h2 class="subheading" id="window">Window</h2>
+        <blockquote>
+          Standard document windows have standard structural components. These components include the title bar, size box, close box, zoom box, and scroll bars.
+          <footer>&mdash; Apple HI Guidelines, p. 134, 159</footer>
+        </blockquote>
+
+        <section class="component">
+          <h3 id="title-bar">Title Bar</h3>
+          <p><code>.title-bar</code> &gt; <code>.title-bar-text</code> + <code>.title-bar-controls</code>. Controls are buttons with <code>aria-label</code> <code>Close</code>, <code>Maximize</code> / <code>Restore</code> (zoom box), <code>Minimize</code> (collapse box) or <code>Help</code>, or the classes <code>.is-close</code>, <code>.is-maximize</code>, etc. The close box always goes on the left and the title is centred, whatever the source order.</p>
+          <p>The racing stripes only show on the active window: add <code>.active</code> to the <code>.window</code> (or to the <code>.title-bar</code>).</p>
+          <%- example(`
+          <div class="window [[active]]" style="width: 360px">
+            <div class="title-bar">
+              <div class="title-bar-text">Macintosh HD</div>
+              <div class="title-bar-controls">
+                <button aria-label="Close"></button>
+                <button aria-label="Maximize"></button>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="window active" style="width: 360px">
+            <div class="title-bar">
+              <div class="title-bar-text">All controls</div>
+              <div class="title-bar-controls">
+                <button aria-label="Help"></button>
+                <button aria-label="Minimize"></button>
+                <button aria-label="Restore"></button>
+                <button aria-label="Close"></button>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="window" style="width: 360px">
+            <div class="title-bar">
+              <div class="title-bar-text">Inactive window</div>
+              <div class="title-bar-controls">
+                <button aria-label="Close"></button>
+                <button aria-label="Maximize"></button>
+              </div>
+            </div>
+          </div>
+          `) %>
+          <p>A disabled control is hidden but keeps its space, e.g. a window with no zoom box.</p>
+          <%- example(`
+          <div class="window active" style="width: 360px">
+            <div class="title-bar">
+              <div class="title-bar-text">Note Pad</div>
+              <div class="title-bar-controls">
+                <button aria-label="Close"></button>
+                <button aria-label="Maximize" [[disabled]]></button>
+              </div>
+            </div>
+          </div>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="window-body">Body &amp; Footer</h3>
+          <p>Put content in <code>.window-body</code> (<code>.has-space</code> adds padding). <code>.window-footer</code> (or <code>footer</code>) sits at the bottom.</p>
+          <%- example(`
+          <div class="window active" style="width: 360px">
+            <div class="title-bar">
+              <div class="title-bar-text">Window With Stuff</div>
+              <div class="title-bar-controls">
+                <button aria-label="Close"></button>
+                <button aria-label="Maximize"></button>
+              </div>
+            </div>
+            <div class="window-body has-space has-scrollbar" style="height: 100px; overflow: auto">
+              Woo I got stuff in me! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec pharetra arcu. Sed posuere dignissim magna, at tempus lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
+            </div>
+            <div class="window-footer" style="text-align: right">
+              <button>Cancel</button>
+              <button class="default">OK</button>
+            </div>
+          </div>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="status-bar">Status Bar</h3>
+          <p><code>.status-bar</code> &gt; <code>.status-bar-field</code>. Put it right under the title bar for the Finder info line, or last in the window for a status bar.</p>
+          <%- example(`
+          <div class="window active" style="width: 400px">
+            <div class="title-bar">
+              <div class="title-bar-text">System Disk</div>
+              <div class="title-bar-controls">
+                <button aria-label="Close"></button>
+                <button aria-label="Maximize"></button>
+              </div>
+            </div>
+            <div class="status-bar">
+              <p class="status-bar-field">5 items</p>
+              <p class="status-bar-field">309K in disk</p>
+              <p class="status-bar-field">90K available</p>
+            </div>
+            <div class="window-body has-space">Icons go here.</div>
+          </div>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="dialog">Dialog</h3>
+          <blockquote>
+            Dialog boxes are windows that provide a standard framework in which the computer can present alternatives from which the user can choose.
+            <footer>&mdash; Apple HI Guidelines, p. 176</footer>
+          </blockquote>
+          <p><code>.window[role=dialog]</code> is centred on screen and hidden until its <code>id</code> is the URL fragment, so a plain link opens it, no JavaScript. A dialog with a title bar is a modeless dialog; add <code>.is-modal</code> (and drop the title bar) for the double-outline modal frame.</p>
+          <%- example(`
+          <a href="#dialog-find">Open modeless dialog</a> &middot;
+          <a href="#dialog-modal">Open modal dialog</a>
+
+          <div class="window active" id="dialog-find" role="dialog" aria-labelledby="dialog-find-title" style="width: 400px">
+            <div class="title-bar">
+              <div class="title-bar-text" id="dialog-find-title">Find</div>
+              <div class="title-bar-controls">
+                <button aria-label="Close" onclick="history.back()"></button>
+              </div>
+            </div>
+            <div class="window-body has-space">
+              <div class="field-row">
+                <label for="text-find">Find:</label>
+                <input id="text-find" type="text" style="flex: 1">
+              </div>
+            </div>
+            <div class="window-footer" style="text-align: right">
+              <button onclick="history.back()">Cancel</button>
+              <button class="default" onclick="history.back()">Find</button>
+            </div>
+          </div>
+
+          <div class="window is-modal" id="dialog-modal" role="dialog" aria-label="Print" style="width: 400px">
+            <div class="window-body">
+              <p class="instruction">Print quality:</p>
+              <div class="field-row">
+                <input id="radio${getNewId()}" type="radio" name="quality" checked>
+                <label for="radio${getCurrentId()}">Best</label>
+              </div>
+              <div class="field-row">
+                <input id="radio${getNewId()}" type="radio" name="quality">
+                <label for="radio${getCurrentId()}">Draft</label>
+              </div>
+              <div class="field-row" style="justify-content: flex-end">
+                <button onclick="history.back()">Cancel</button>
+                <button class="default" onclick="history.back()">OK</button>
+              </div>
+            </div>
+          </div>
+          `) %>
+        </section>
+
+        <h2 class="subheading" id="extras">Extras</h2>
+        <p>Mac-specific additions that follow the same conventions.</p>
+
+        <section class="component">
+          <h3 id="alert">Alert box</h3>
+          <blockquote>
+            Alert boxes provide messages about error conditions and warn users about potentially hazardous situations or actions.
+            <footer>&mdash; Apple HI Guidelines, p. 176</footer>
+          </blockquote>
+          <p><code>.window[role=alertdialog]</code>: the double-outline frame, opened like a dialog.</p>
+          <%- example(`
+          <a href="#alert-demo">Open alert</a>
+
+          <div class="window" id="alert-demo" role="alertdialog" aria-label="Alert" style="width: 420px">
+            <div class="window-body">
+              <div class="field-row" style="align-items: flex-start">
+                <div class="square"></div>
+                <p class="instruction">Are you sure you want to erase the disk named "Untitled"?</p>
+              </div>
+              <div class="field-row" style="justify-content: flex-end">
+                <button onclick="history.back()">Cancel</button>
+                <button class="default" onclick="history.back()">Erase</button>
+              </div>
+            </div>
+          </div>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="borders">Double border</h3>
+          <p><code>.outer-border</code> &gt; <code>.inner-border</code> draws the modal frame around anything, e.g. an inline "About" box.</p>
+          <%- example(`
+          <div class="outer-border" style="width: 360px">
+            <div class="inner-border" style="padding: 12px; text-align: center">
+              <p>The Macintosh Finder, Version 1.0 (18 Jan 84)</p>
+              <p>&copy; 1984 Apple Computer</p>
+            </div>
+          </div>
+          `) %>
+        </section>
+
+        <section class="component">
+          <h3 id="apple">Apple logo</h3>
+          <p><code>.apple</code> renders the 1-bit Apple logo, e.g. as the first menubar item.</p>
+          <%- example(`
+          <span role="img" class="apple" aria-label="Apple"></span>
+          `) %>
+        </section>
+
+        <h2 class="subheading" id="contributing">Contributing, Credits, etc.</h2>
+        <p>Thanks for checking this project out! This library was made in good fun and was largely inspired by <a href="https://github.com/jdan/98.css" target="_blank">98.css</a>. The <a href="http://www.suppertime.co.uk/blogmywiki/2017/04/chicago/" target="_blank">Chicago 12pt</a> and <a href="http://www.suppertime.co.uk/blogmywiki/2017/04/finderskeepers/" target="_blank">Geneva 9pt</a> fonts are recreations by <a href="https://twitter.com/blogmywiki" target="_blank">@blogmywiki</a>.</p>
+        <p>If you find a bug, consider opening an issue <a href="https://github.com/sakofchit/system.css/issues">here</a>. If there's something that you'd like to add, please feel free to create a PR!</p>
+        <p>If you'd like to see what else I'm up to, consider following me on <a href="https://twitter.com/sakofchit" target="_blank">Twitter</a> or checking out my <a href="https://sakun.co" target="_blank">personal site</a> :)</p>
+
+        <h2 class="subheading">Sponsors</h2>
+        <p><a href="https://getcssscan.com/?ref=systemcss" target="_blank">CSS Scan</a>: The fastest and easiest way to check, copy and edit CSS</p>
+      </div>
+    </main>
   </div>
 
+  <script>
+    // Tab switching for the docs examples
+    document.querySelectorAll('[role="tab"]').forEach((tab) =>
+      tab.addEventListener("click", () => {
+        const list = tab.closest('[role="tablist"]');
+        list.querySelectorAll('[role="tab"]').forEach((t) => {
+          const selected = t === tab;
+          t.setAttribute("aria-selected", selected);
+          const panel = document.getElementById(t.getAttribute("aria-controls"));
+          if (panel) panel.hidden = !selected;
+        });
+      })
+    );
+  </script>
 </body>
 </html>

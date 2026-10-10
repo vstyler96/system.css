@@ -1,0 +1,23 @@
+/* Monochrome spinning wait cursor (the System 7 "beach ball") */
+.spinner,
+.loader {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--sys-secondary);
+  border-radius: 50%;
+  background: conic-gradient(var(--sys-secondary) 0 25%, var(--sys-primary) 0 50%, var(--sys-secondary) 0 75%, var(--sys-primary) 0);
+  color: transparent;
+  vertical-align: middle;
+
+  &.animate {
+    animation: sys-spinner 0.8s steps(4) infinite;
+  }
+}
+
+@keyframes sys-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

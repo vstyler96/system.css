@@ -1,99 +1,77 @@
-@font-face {
-  font-family: Geneva9;
-  src: url("fonts/FindersKeepers.ttf")
-}
-
-@font-face {
-  font-family: Chicago_12;
-  src: url("fonts/ChiKareGo2.ttf"); 
-}
-
-
 * {
   box-sizing: border-box;
 }
 
+/* Desktop grid pattern: docs page only, the library no longer styles body */
 body {
   margin: 0;
-  padding: 0;
+  padding: 18px;
+  font: 16px Geneva, "Chicago_12", sans-serif;
+  letter-spacing: -0.025em;
+  background: linear-gradient(90deg, #fff 21px, transparent 1%) center, linear-gradient(#fff 21px, transparent 1%) center, #000;
+  background-size: 22px 22px;
+  background-attachment: fixed;
 }
 
-/* Layout: */
-
-.col-main {
-  flex: 1;
-}  
-
-.col-complementary {
-  flex: 1;
+.layout {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
 }
 
-aside {
-  width: 200px;
+.sidebar {
+  flex: none;
+  width: 220px;
   position: sticky;
   top: 18px;
-  bottom: 0;
-  display: flex;
-  align-items: stretch;
   height: calc(100vh - 36px);
 }
 
-html {
-  font-family: "Inconsolata", Menlo, Chicago, Geneva;
-  font-size: 18px;
-  letter-spacing: -0.025em;
-  min-height: 100vh;
+.sidebar .window-body {
+  overflow-y: auto;
+}
+
+main.window {
+  flex: 1;
+  min-width: 0;
+}
+
+h2,
+h3 {
+  font-family: Chicago;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 2em;
 }
 
 h3 {
-  font-family: Chicago;
   font-size: 1.5em;
 }
 
 .heading {
-  font-size: 3rem;
+  font: 3rem Chicago;
 }
 
 .desc {
-  font-family: Geneva_9;
-  font-size: 2em;
+  font: 2em Geneva_9;
 }
-
 
 .center {
   text-align: center;
 }
 
 .component {
-  display: flex;
   margin-top: 24px;
-  font-family: Geneva;
-  font-size: 1em;
+  padding-left: 20px;
 }
 
-.alert-text,
-.dialog-text,
-.modal-text,
-.modeless-text {
-  font-family: Chicago_12;
-  font-size: 1em;
-  font-weight: normal;
-}
-
-.dialog-text {
-  margin-top: 20px;
-}
-
-.modal-text, .alert-text {
-  font-size: 1.2em;
-  margin-top: 10px;
-}
-
-p {
-  font-family: Geneva;
+main > .window-body > p,
+main > .window-body > ul,
+.component > p {
   font-size: 0.9em;
 }
-
 
 blockquote {
   margin: 0 0 20px;
@@ -105,75 +83,57 @@ blockquote {
 
 blockquote footer {
   margin: 12px 0 0 12px;
+  padding: 0;
+  border: 0;
 }
 
 .example {
-  margin: 16px;
+  margin: 16px 0;
   padding: 12px 24px;
   border-left: 1px solid #000000;
 }
 
-summary {
+.example > details {
+  margin-top: 12px;
+}
+
+.example > details > summary {
   font-size: 14px;
-  padding-top: 10px;
-  cursor: pointer;
-  margin: 12px 0 0 0;
-  width: 30%;
 }
 
 pre {
-  font-size: 13px;
-}
-
-.modal-dialog {
-  width: 50%;
-}
-
-.btn.active {
-  background: black;
-  border-radius:6px;
-  color: white;
-  font-family: Chicago_12;
+  font: 13px Monaco, monospace;
+  overflow-x: auto;
 }
 
 .square {
+  flex: none;
   width: 50px;
   height: 50px;
-  background-color: transparent;
   border: 1.5px solid black;
-  padding-right: 46px;
 }
 
 .menu-items {
-  padding: 0;
+  margin: 0;
+  padding: 8px 8px 8px 24px;
   font-size: 14px;
 }
 
-/* responsive shiz */
-@media only screen and (min-width: 640px) {
-  .layout {
-    display: flex;
-    justify-content: space-between;
-  }
-  .standard-dialog {
-    margin-right: 20px;
-    margin-top: 18px;
-  }
-  .sidebar {
-    z-index: 1;
-  }
+.menu-items > li {
+  margin-bottom: 1rem;
 }
-@media only screen and (max-width: 600px) {
+
+@media only screen and (max-width: 640px) {
+  body {
+    padding: 8px;
+  }
   .sidebar {
     display: none !important;
   }
   .example {
-    margin: 0px;
+    padding: 8px;
   }
   .component {
-    display: contents;
-  }
-  .scale-down {
-    transform: scale(0.8);
+    padding-left: 0;
   }
 }

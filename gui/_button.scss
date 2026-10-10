@@ -1,0 +1,59 @@
+button,
+[role="button"],
+input[type="file"]::file-selector-button {
+  font: var(--sys-font);
+  box-sizing: border-box;
+  min-width: 59px;
+  min-height: 20px;
+  padding: 0 20px;
+  border-style: solid;
+  border-width: 5.5px;
+  border-image: url("./icon/button.svg") 30 stretch;
+  background: var(--sys-el-bg);
+  color: var(--sys-el-c);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button,
+[role="button"] {
+  &:not(:disabled) {
+    &:active,
+    &.active {
+      background: var(--sys-el-bg-a);
+      border-radius: var(--sys-el-bdr);
+      color: var(--sys-el-c-a);
+    }
+  }
+
+  &:focus-visible,
+  &.focused {
+    outline: 1px dotted var(--sys-el-c);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    color: var(--sys-el-c-d);
+    cursor: default;
+  }
+
+  /* Default button: thick outer ring */
+  &.default {
+    border-width: 0.5em;
+    border-image: url("./icon/button-default.svg") 60 stretch;
+
+    &:not(:disabled):active {
+      border-radius: 12px;
+    }
+  }
+}
+
+label[role="button"] {
+  display: inline-flex;
+  align-items: center;
+
+  > input[type="file"] {
+    display: none;
+  }
+}

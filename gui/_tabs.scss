@@ -1,0 +1,71 @@
+/* System 6 had no tab control; these are drawn like folder tabs:
+ * rounded-top boxes, the selected one taller and fused with the panel below. */
+:root {
+  --sys-tab-bg: var(--sys-surface);
+}
+
+menu[role="tablist"] {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  margin: 0 0 -1px;
+  padding: 0 0 0 8px;
+  list-style: none;
+  text-indent: 0;
+
+  button {
+    position: relative;
+    display: block;
+    min-width: unset;
+    min-height: 19px;
+    margin-right: -1px;
+    padding: 0 12px;
+    border: 1px solid var(--sys-el-bd);
+    border-image: none;
+    border-radius: var(--sys-el-bdr) var(--sys-el-bdr) 0 0;
+    background: var(--sys-tab-bg);
+    color: var(--sys-el-c);
+
+    &:not(:disabled):active {
+      background: var(--sys-tab-bg);
+      border-radius: var(--sys-el-bdr) var(--sys-el-bdr) 0 0;
+      color: var(--sys-el-c);
+    }
+
+    &[aria-selected="true"] {
+      z-index: 2;
+      min-height: 23px;
+      background: var(--sys-tab-bg);
+      border-bottom-color: var(--sys-tab-bg);
+
+      &:not(:disabled):active {
+        background: var(--sys-tab-bg);
+      }
+    }
+
+    &:focus-visible {
+      outline: 1px dotted var(--sys-el-c);
+      outline-offset: -4px;
+    }
+
+    &:disabled {
+      color: var(--sys-el-c-d);
+    }
+  }
+
+  &.justified button {
+    flex-grow: 1;
+    text-align: center;
+  }
+}
+
+[role="tabpanel"] {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 9px;
+  padding: 14px;
+  clear: both;
+  background: var(--sys-tab-bg);
+  border: 1px solid var(--sys-el-bd);
+  box-shadow: var(--sys-el-sd);
+}

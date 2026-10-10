@@ -1,0 +1,287 @@
+:root {
+  /* w = window, wct = window control */
+  --sys-w-space: 8px;
+  --sys-w-bd: var(--sys-secondary);
+  --sys-w-sd: 1px 1px 0 var(--sys-secondary);
+  --sys-title-h: 20px;
+  --sys-title-stripes: repeating-linear-gradient(var(--sys-secondary) 0 1px, transparent 1px 2px);
+  --sys-title-c-d: var(--sys-tertiary); /* inactive title text */
+  --sys-wct-size: 13px;
+  --sys-wct-bd-d: var(--sys-tertiary); /* inactive window controls */
+}
+
+.window {
+  font: var(--sys-font);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background: var(--sys-surface);
+  color: var(--sys-el-c);
+  border: 1px solid var(--sys-w-bd);
+  box-shadow: var(--sys-w-sd);
+
+  &-body {
+    flex: 1 1 auto;
+    background: var(--sys-surface);
+
+    &.has-space {
+      padding: var(--sys-w-space);
+    }
+
+    pre {
+      font: var(--sys-font-mono);
+    }
+  }
+
+  &-footer,
+  footer {
+    padding: var(--sys-w-space);
+    border-top: 1px solid var(--sys-w-bd);
+    background: var(--sys-surface);
+  }
+
+  fieldset {
+    margin-bottom: var(--sys-w-space);
+  }
+
+  /* Modal dialog / alert: double-outline frame, no shadow */
+  &.is-modal,
+  &[role="alertdialog"] {
+    padding: 3px;
+    border: 2px solid var(--sys-w-bd);
+    box-shadow: none;
+
+    > .window-body {
+      border: 3px solid var(--sys-w-bd);
+      border-width: 3.5px 5px;
+      padding: 13px;
+    }
+  }
+
+  &[role="dialog"],
+  &[role="alertdialog"] {
+    @keyframes sys-dialog-open {
+      0% {
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 0;
+      }
+      100% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+      }
+    }
+
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+
+    &:target {
+      visibility: visible;
+      animation: sys-dialog-open 0.15s steps(3) backwards;
+    }
+  }
+}
+
+.title-bar {
+  font: var(--sys-font);
+  flex: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: var(--sys-title-h);
+  padding: 4px 2px;
+  border-bottom: 1px solid var(--sys-w-bd);
+  background: var(--sys-surface);
+
+  &-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: calc(100% - 4 * var(--sys-wct-size) - 16px);
+    padding: 0 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1;
+    background: var(--sys-surface);
+    color: var(--sys-title-c-d);
+    cursor: default;
+  }
+
+  /* Controls: close box on the left, zoom/collapse/help on the right */
+  &-controls {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+    padding: 0 6px;
+
+    button {
+      position: relative;
+      box-sizing: border-box;
+      width: var(--sys-wct-size);
+      height: var(--sys-wct-size);
+      min-width: 0;
+      min-height: 0;
+      padding: 0;
+      border: 1px solid var(--sys-wct-bd-d);
+      border-image: none;
+      border-radius: 0;
+      background: var(--sys-surface);
+      box-shadow: 0 0 0 2px var(--sys-surface); /* white gap that cuts the stripes */
+      color: inherit;
+      font: inherit;
+
+      &:not(:disabled):active {
+        background: var(--sys-surface);
+        border-radius: 0;
+        color: inherit;
+      }
+
+      &:focus-visible {
+        outline: 1px dotted var(--sys-el-c);
+        outline-offset: 3px;
+      }
+
+      &:disabled {
+        visibility: hidden; /* keeps the layout symmetric */
+      }
+
+      &[aria-label="Close"],
+      &.is-close {
+        order: -1;
+        margin-right: auto;
+      }
+
+      /* Zoom box: small square in the top-left corner */
+      &[aria-label="Maximize"],
+      &.is-maximize,
+      &[aria-label="Restore"],
+      &.is-restore {
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 6px;
+          height: 6px;
+          border: solid var(--sys-wct-bd-d);
+          border-width: 0 1px 1px 0;
+        }
+      }
+
+      &[aria-label="Restore"],
+      &.is-restore {
+        &::before {
+          width: 4px;
+          height: 4px;
+        }
+      }
+
+      /* Collapse box (System 7 window shade): one horizontal bar */
+      &[aria-label="Minimize"],
+      &.is-minimize {
+        &::before {
+          content: "";
+          position: absolute;
+          top: 4px;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: var(--sys-wct-bd-d);
+        }
+      }
+
+      &[aria-label="Help"],
+      &.is-help {
+        &::before {
+          content: "?";
+          position: absolute;
+          inset: 0;
+          font: 9px/11px "Geneva_9", sans-serif;
+          text-align: center;
+          color: var(--sys-wct-bd-d);
+        }
+      }
+    }
+  }
+
+  /* Active title-bar: racing stripes and black controls */
+  .window.active > &,
+  &.active {
+    background: var(--sys-title-stripes) content-box, var(--sys-surface);
+
+    .title-bar-text {
+      color: var(--sys-title-c);
+    }
+
+    .title-bar-controls button {
+      border-color: var(--sys-w-bd);
+
+      &::before {
+        border-color: var(--sys-w-bd);
+        color: var(--sys-w-bd);
+      }
+
+      &[aria-label="Minimize"]::before,
+      &.is-minimize::before {
+        background: var(--sys-w-bd);
+      }
+
+      /* Pressed close box shows an X */
+      &[aria-label="Close"]:active,
+      &.is-close:active {
+        background: linear-gradient(45deg, transparent 45%, var(--sys-w-bd) 45% 55%, transparent 55%),
+          linear-gradient(-45deg, transparent 45%, var(--sys-w-bd) 45% 55%, transparent 55%), var(--sys-surface);
+      }
+
+      &:not([aria-label="Close"]):not(.is-close):active {
+        background: var(--sys-w-bd);
+      }
+    }
+  }
+}
+
+/* Finder-style info bar: put it directly under the title bar or at the bottom */
+.status-bar {
+  font: var(--sys-font-small);
+  flex: none;
+  display: flex;
+  border-bottom: 1px solid var(--sys-w-bd);
+  background: var(--sys-surface);
+
+  &:last-child {
+    border-bottom: 0;
+    border-top: 1px solid var(--sys-w-bd);
+  }
+
+  &-field {
+    flex-grow: 1;
+    margin: 0;
+    padding: 4px 8px;
+
+    + .status-bar-field {
+      text-align: center;
+    }
+
+    &:last-child:not(:first-child) {
+      text-align: right;
+    }
+  }
+}
+
+/* Double-outline frame, usable outside a .window */
+.outer-border {
+  border: 2px solid var(--sys-w-bd);
+  padding: 3px;
+}
+
+.inner-border {
+  border: solid var(--sys-w-bd);
+  border-width: 3.5px 5px;
+}

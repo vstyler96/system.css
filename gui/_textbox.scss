@@ -1,0 +1,42 @@
+input[type="url"],
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+textarea {
+  font: var(--sys-font);
+  box-sizing: border-box;
+  padding: 2px 5px;
+  border: 1px solid var(--sys-el-bd);
+  border-radius: 0;
+  background: var(--sys-el-bg);
+  color: var(--sys-el-c);
+
+  &:focus {
+    outline: 1px solid var(--sys-el-bd); /* doubled border = keyboard focus */
+  }
+
+  &::selection {
+    background: var(--sys-li-bg-hl);
+    color: var(--sys-li-c-hl);
+  }
+
+  &:disabled {
+    border-color: var(--sys-el-bd-d);
+    color: var(--sys-el-c-d);
+  }
+}
+
+input {
+  &[type="url"],
+  &[type="text"],
+  &[type="email"],
+  &[type="number"],
+  &[type="password"] {
+    height: 24px;
+  }
+}
+
+textarea {
+  resize: vertical;
+}
